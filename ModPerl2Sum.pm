@@ -1,5 +1,10 @@
 package ModPerl2Sum;
 
+# <Location /sum>
+#     SetHandler modperl
+#     PerlResponseHandler +ModPerl2Sum
+# </Location>
+
 use strict;
 use warnings;
 
