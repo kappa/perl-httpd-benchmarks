@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+use EV;
 use AnyEvent::HTTPD;
 
 my $httpd = AnyEvent::HTTPD->new (port => 8010);
@@ -15,5 +16,7 @@ $httpd->reg_cb (
             ]});
     },
 );
+
+print "AnyEvent uses " . AnyEvent->detect . "\n";
 
 $httpd->run; # making a AnyEvent condition variable would also work
