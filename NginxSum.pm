@@ -1,12 +1,14 @@
 package Sum;
 use CGI::PSGI;
 use Dancer;
+
 use Data::Dumper;
 
-use Dancer::Config 'setting';
-setting apphandler  => 'PSGI';
+set apphandler  => 'PSGI';
+set access_log  => 0;
 
-get '/sum' => sub {
+get '/sum_dancer' => sub {
+    content_type 'text/plain';
     params->{a} + params->{b}
 };
 
@@ -33,10 +35,37 @@ sub handler_dancer {
     Dancer->dance(CGI::PSGI->new(shift));
 }
 
-sub handler_raw {
+sub handler_rawpsgi {
     my $q = CGI::PSGI->new(shift);
 
     my $body = $q->param('a') + $q->param('b');
+
+    [
+        200,
+        ['Content-Type'     => 'text/plain',
+         'Content-Length'   => bytes::length($body)],
+        [$body],
+    ];
+}
+
+sub handler_raw2 {
+    my $env = shift;
+    my ($aa, $bb) = ($env->{QUERY_STRING} =~ /a=(\d+)&b=(\d+)/);
+    my $body = $aa + $bb;
+
+    [
+        200,
+        ['Content-Type'     => 'text/plain',
+         'Content-Length'   => bytes::length($body)],
+        [$body],
+    ];
+}
+
+# this handler requires changes to Yappo's nginx-psgi-patchs
+# to pass get params down from nginx in $env
+sub handler_raw {
+    my $env = shift;
+    my $body = $env->{a} + $env->{b};
 
     [
         200,
