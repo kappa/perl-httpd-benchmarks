@@ -1,12 +1,14 @@
 package Sum;
 use CGI::PSGI;
 use Dancer;
+
 use Data::Dumper;
 
-use Dancer::Config 'setting';
-setting apphandler  => 'PSGI';
+set apphandler  => 'PSGI';
+set access_log  => 0;
 
-get '/sum' => sub {
+get '/sum_dancer' => sub {
+    content_type 'text/plain';
     params->{a} + params->{b}
 };
 
