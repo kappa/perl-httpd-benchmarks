@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use POE::Component::Server::HTTP;
-use POE;
+use POE qw(XS::Queue::Array Loop::IO_Poll);
 use URI;
 use CGI::Simple;
 
