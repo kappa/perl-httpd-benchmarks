@@ -61,6 +61,8 @@ sub handler_raw2 {
     ];
 }
 
+# this handler requires changes to Yappo's nginx-psgi-patchs
+# to pass get params down from nginx in $env
 sub handler_raw {
     my $env = shift;
     my $body = $env->{a} + $env->{b};
