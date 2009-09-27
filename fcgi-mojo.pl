@@ -18,13 +18,16 @@ use warnings;
 $ENV{MOJO_APP} ||= 'Bench';
 
 use Mojo::Server::FCGI::Prefork;
+
+my $sock_fn = '/tmp/mojo_fcgi.socket',
 my $fcgi = Mojo::Server::FCGI::Prefork->new(
-    path => '/tmp/mojo_fcgi.socket',
+    path => $sock_fn,
     max_servers => 1,
     start_servers   => 1,
     min_spare_servers => 0,
     max_spare_servers => 1,
     );
+eval { chmod 0777, $sock_fn };
 
 $fcgi->run;
 
