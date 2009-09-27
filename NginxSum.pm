@@ -33,10 +33,22 @@ sub handler_dancer {
     Dancer->dance(CGI::PSGI->new(shift));
 }
 
-sub handler_raw {
+sub handler_rawpsgi {
     my $q = CGI::PSGI->new(shift);
 
     my $body = $q->param('a') + $q->param('b');
+
+    [
+        200,
+        ['Content-Type'     => 'text/plain',
+         'Content-Length'   => bytes::length($body)],
+        [$body],
+    ];
+}
+
+sub handler_raw {
+    my $env = shift;
+    my $body = $env->{a} + $env->{b};
 
     [
         200,
