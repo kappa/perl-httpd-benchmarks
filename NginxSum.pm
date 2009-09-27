@@ -46,6 +46,19 @@ sub handler_rawpsgi {
     ];
 }
 
+sub handler_raw2 {
+    my $env = shift;
+    my ($aa, $bb) = ($env->{QUERY_STRING} =~ /a=(\d+)&b=(\d+)/);
+    my $body = $aa + $bb;
+
+    [
+        200,
+        ['Content-Type'     => 'text/plain',
+         'Content-Length'   => bytes::length($body)],
+        [$body],
+    ];
+}
+
 sub handler_raw {
     my $env = shift;
     my $body = $env->{a} + $env->{b};
