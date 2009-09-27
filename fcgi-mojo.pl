@@ -3,6 +3,17 @@
 use strict;
 use warnings;
 
+# location /fcgimojo {
+#     fastcgi_pass unix:/tmp/mojo_fcgi.socket;
+# 
+#     fastcgi_param  MOJO_APP  Bench;
+#     fastcgi_param  PATH_INFO   $fastcgi_script_name; 
+#     fastcgi_param  QUERY_STRING  $query_string;
+#     fastcgi_param  REQUEST_METHOD  $request_method;
+#     fastcgi_param  CONTENT_TYPE  $content_type;
+#     fastcgi_param  CONTENT_LENGTH  $content_length;
+# }
+
 # Application
 $ENV{MOJO_APP} ||= 'Bench';
 
