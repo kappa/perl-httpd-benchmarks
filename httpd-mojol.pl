@@ -3,6 +3,7 @@
 use Mojolicious::Lite;
 
 app->log->level('error');
+app->mode('production');
 
 get '/sum' => sub {
     my $self = shift;
