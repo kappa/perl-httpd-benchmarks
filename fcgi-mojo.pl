@@ -19,7 +19,7 @@ $ENV{MOJO_APP} ||= 'Bench';
 
 use Mojo::Server::FCGI::Prefork;
 
-my $sock_fn = '/tmp/mojo_fcgi.socket',
+my $sock_fn = '/tmp/mojo_fcgi.socket';
 my $fcgi = Mojo::Server::FCGI::Prefork->new(
     path => $sock_fn,
     max_servers => 1,
