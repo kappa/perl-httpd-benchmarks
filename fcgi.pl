@@ -25,7 +25,7 @@ my $request = FCGI::Request(\*STDIN, \*STDOUT, \*STDERR, \%ENV, $socket, FCGI::F
 
 while ($request->Accept() >= 0) {
     my $q = CGI::Simple->new;
-    print "Content-Type: text/plain\n\n".
+    print $q->header(-type => 'text/plain'),
         ($q->param('a') + $q->param('b'));
 }
 
