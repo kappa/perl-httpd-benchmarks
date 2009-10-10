@@ -11,7 +11,7 @@ my $httpd = AnyEvent::HTTPD->new (port => 8010);
 $httpd->reg_cb (
     '/sum' => sub {
         my ($httpd, $req) = @_;
-        $req->respond ({ content => ['text/html',
+        $req->respond ({ content => ['text/plain',
             $req->parm('a') + $req->parm('b')
             ]});
     },
