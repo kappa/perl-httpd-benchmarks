@@ -75,4 +75,18 @@ sub handler_raw {
     ];
 }
 
+use nginx;
+use CGI::Simple;
+
+sub handler_perl {
+    my $r = shift;
+
+    my $q = CGI::Simple->new($r->args);
+
+    $r->send_http_header("text/plain");
+    $r->print($q->param('a') + $q->param('b'));
+
+    return OK;
+}
+
 1;
