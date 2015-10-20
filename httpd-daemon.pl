@@ -8,7 +8,7 @@ use HTTP::Status;
 use URI;
 use CGI::Simple;
 
-my $d = HTTP::Daemon->new( LocalPort => 8010, Listen => 100 ) || die;
+my $d = HTTP::Daemon->new( LocalPort => 8012, Listen => 100 ) || die;
 print "Please contact me at: <URL:", $d->url, ">\n";
 while (my $c = $d->accept) {
     while (my $r = $c->get_request) {

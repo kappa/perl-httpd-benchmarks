@@ -8,7 +8,6 @@ my $engine = HTTP::Engine->new(
     interface => {
         module => 'ServerSimple',
         args   => {
-            host => 'localhost',
             port =>  8010,
         },
         request_handler => sub {
